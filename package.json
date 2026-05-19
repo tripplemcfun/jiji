@@ -1,0 +1,62 @@
+import { GraduationCap, Instagram, Facebook, Twitter, Linkedin } from "lucide-react";
+
+export default function MainFooter() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="bg-[#003366] text-white py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="col-span-1 md:col-span-2">
+            <div className="flex items-center space-x-2 mb-6">
+              <div className="bg-white p-2 rounded-lg">
+                <GraduationCap className="w-6 h-6 text-[#003366]" />
+              </div>
+              <span className="font-serif text-2xl font-bold tracking-tight">
+                JBMR <span className="text-[#ffcc00]">Coaching</span>
+              </span>
+            </div>
+            <p className="text-blue-100 max-w-sm mb-8 leading-relaxed">
+              Excellence in education since our inception. We provide high-quality coaching for students from 6th to 12th grade, focusing on all-round development.
+            </p>
+            <div className="flex space-x-4">
+              {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-serif text-xl font-bold mb-6">Quick Links</h4>
+            <ul className="space-y-4 text-blue-100">
+              <li><a href="#" className="hover:text-[#ffcc00] transition-colors">Home</a></li>
+              <li><a href="#courses" className="hover:text-[#ffcc00] transition-colors">Courses</a></li>
+              <li><a href="#faculty" className="hover:text-[#ffcc00] transition-colors">Our Faculty</a></li>
+              <li><a href="#contact" className="hover:text-[#ffcc00] transition-colors">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-serif text-xl font-bold mb-6">Boards & Courses</h4>
+            <ul className="space-y-4 text-blue-100">
+              <li><span className="hover:text-[#ffcc00] cursor-default transition-colors">UP Board (6-12th)</span></li>
+              <li><span className="hover:text-[#ffcc00] cursor-default transition-colors">CBSE Board (6-12th)</span></li>
+              <li><span className="hover:text-[#ffcc00] cursor-default transition-colors">ICSE Board (6-12th)</span></li>
+              <li><span className="hover:text-[#ffcc00] cursor-default transition-colors">English Speaking</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <p className="text-blue-200 text-sm">© {currentYear} JBMR Coaching Classes. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
