@@ -1,89 +1,79 @@
 import { motion } from "motion/react";
-import { GraduationCap, Menu, X, Phone } from "lucide-react";
-import { useState } from "react";
-import { cn } from "@/src/lib/utils";
+import { CheckCircle2, Languages, School, Trophy } from "lucide-react";
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Courses", href: "#courses" },
-    { name: "Faculty", href: "#faculty" },
-    { name: "Contact", href: "#contact" },
+export default function Courses() {
+  const courses = [
+    {
+      id: "boards",
+      title: "Board Specialization",
+      description: "Focused preparation for UP, CBSE, and ICSE boards from 6th to 12th standard.",
+      icon: School,
+      color: "bg-blue-100 text-blue-600",
+      features: ["Subject mastery", "Past paper analysis", "Regular mock tests", "Doubt clearing sessions"]
+    },
+    {
+      id: "english",
+      title: "English Speaking",
+      description: "Master the art of communication with our specialized English speaking course.",
+      icon: Languages,
+      color: "bg-brand-yellow/20 text-brand-blue",
+      features: ["Grammar foundation", "Vocabulary building", "Confidence coaching", "Public speaking focus"]
+    },
+    {
+      id: "all-subjects",
+      title: "All Subjects",
+      description: "Comprehensive coaching for all subjects including Math, Science, and Social Studies.",
+      icon: Trophy,
+      color: "bg-green-100 text-green-600",
+      features: ["Experiential learning", "Concept clarity", "Regular assignments", "Performance tracking"]
+    }
   ];
 
   return (
-    <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <section id="courses" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center space-x-2">
-            <div className="bg-brand-blue p-2 rounded-lg">
-              <GraduationCap className="w-6 h-6 text-white" />
-            </div>
-            <span className="font-serif text-xl font-bold tracking-tight text-brand-blue">
-              JBMR <span className="text-brand-red">Coaching</span>
-            </span>
-          </div>
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl font-serif font-bold mb-4"
+          >
+            Programs We Offer
+          </motion.h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Tailored educational programs designed to help students excel in their academic journey and beyond.
+          </p>
+        </div>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-            <a
-              href="tel:+919310882016"
-              className="flex items-center space-x-2 bg-brand-blue text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {courses.map((course, index) => (
+            <motion.div
+              key={course.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-brand-blue/20 transition-all group"
             >
-              <Phone className="w-4 h-4" />
-              <span>Contact Now</span>
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 hover:text-brand-blue"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+              <div className={`${course.color} w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform`}>
+                <course.icon className="w-7 h-7" />
+              </div>
+              <h3 className="text-2xl font-serif font-bold mb-4 text-gray-900">{course.title}</h3>
+              <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+                {course.description}
+              </p>
+              <ul className="space-y-3">
+                {course.features.map((feature) => (
+                  <li key={feature} className="flex items-center space-x-2 text-sm text-gray-700">
+                    <CheckCircle2 className="w-4 h-4 text-brand-blue" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       </div>
-
-      {/* Mobile Links */}
-      <motion.div
-        initial={false}
-        animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
-        className="md:hidden overflow-hidden bg-white border-t border-gray-100"
-      >
-        <div className="px-4 py-4 space-y-2">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </a>
-          ))}
-          <a
-            href="tel:+919310882016"
-            className="w-full mt-4 flex items-center justify-center space-x-2 bg-brand-blue text-white px-4 py-3 rounded-lg text-base font-semibold"
-          >
-            <Phone className="w-5 h-5" />
-            <span>Call Us</span>
-          </a>
-        </div>
-      </motion.div>
-    </nav>
+    </section>
   );
 }

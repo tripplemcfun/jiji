@@ -1,108 +1,162 @@
 import { motion } from "motion/react";
-import { ArrowRight, BookOpen, GraduationCap, Star } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
+import React, { useState } from "react";
 
-export default function Hero() {
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    course: "Board Coaching (6-12th)",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const whatsappNumber = "917053353757";
+    const text = `Student Name - ${formData.name}
+Course - ${formData.course}
+${formData.message}`;
+
+    const encodedText = encodeURIComponent(text);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+    
+    window.open(whatsappUrl, "_blank");
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
-    <section className="relative pt-24 pb-16 md:pt-40 md:pb-32 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 z-0 bg-gray-50">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-brand-blue/5 to-transparent"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section id="contact" className="py-24 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
           >
-            <div className="inline-flex items-center space-x-2 bg-brand-blue/10 px-3 py-1 rounded-full mb-6">
-              <Star className="w-4 h-4 text-brand-blue fill-brand-blue" />
-              <span className="text-xs font-bold uppercase tracking-wider text-brand-blue">
-                Premier Coaching in the Region
-              </span>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 leading-tight mb-6">
-              Empowering Students for a <span className="text-brand-blue">Brighter Future</span>
-            </h1>
-            
-            <p className="text-lg text-gray-600 mb-8 max-w-lg leading-relaxed">
-              At JBMR Coaching Classes, we focus on comprehensive learning for 6th to 12th grade students across UP, CBSE, and ICSE boards. Build strong foundations with expert guidance.
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+              Get in Touch
+            </h2>
+            <p className="text-gray-600 mb-12 max-w-md">
+              Have questions about our courses or scheduling? reach out to us and we'll get back to you shortly.
             </p>
 
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <a
-                href="#courses"
-                className="flex items-center justify-center space-x-2 bg-brand-blue text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:-translate-y-0.5 transition-all"
-              >
-                <span>View Our Courses</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
-              <a
-                href="#faculty"
-                className="flex items-center justify-center space-x-2 bg-white border-2 border-gray-100 text-gray-700 px-8 py-4 rounded-xl font-bold hover:border-brand-blue/30 transition-all"
-              >
-                <span>Meet Our Faculty</span>
-              </a>
-            </div>
+            <div className="space-y-8">
+              <div className="flex items-start space-x-4">
+                <div className="bg-brand-blue/10 p-3 rounded-xl mt-1">
+                  <Phone className="w-6 h-6 text-brand-blue" />
+                </div>
+                <div>
+                  <span className="block text-gray-500 text-sm mb-1">Call Us</span>
+                  <a href="tel:+919310882016" className="text-xl font-bold text-gray-900 hover:text-brand-blue transition-colors">
+                    +91 9310882016
+                  </a>
+                  <span className="mx-2 text-gray-300">|</span>
+                  <a href="tel:+917053353757" className="text-xl font-bold text-gray-900 hover:text-brand-blue transition-colors">
+                    +91 7053353757
+                  </a>
+                </div>
+              </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-6 border-t border-gray-100 pt-8">
-              <div>
-                <span className="block text-2xl font-bold text-brand-blue">6-12th</span>
-                <span className="text-xs text-gray-500 uppercase tracking-wide">All Subjects</span>
+              <div className="flex items-start space-x-4">
+                <div className="bg-brand-blue/10 p-3 rounded-xl mt-1">
+                  <MapPin className="w-6 h-6 text-brand-blue" />
+                </div>
+                <div>
+                  <span className="block text-gray-500 text-sm mb-1">Visit Us</span>
+                  <address className="not-italic text-lg font-bold text-gray-900 max-w-xs">
+                    BR Complex Sirsa
+                  </address>
+                </div>
               </div>
-              <div>
-                <span className="block text-2xl font-bold text-brand-blue">3+ Boards</span>
-                <span className="text-xs text-gray-500 uppercase tracking-wide">UP, CBSE, ICSE</span>
-              </div>
-              <div>
-                <span className="block text-2xl font-bold text-brand-blue">English</span>
-                <span className="text-xs text-gray-500 uppercase tracking-wide">Speaking Mastery</span>
+
+              <div className="flex items-start space-x-4">
+                <div className="bg-brand-blue/10 p-3 rounded-xl mt-1">
+                  <Mail className="w-6 h-6 text-brand-blue" />
+                </div>
+                <div>
+                  <span className="block text-gray-500 text-sm mb-1">Email Us</span>
+                  <a href="mailto:sharmajugendra5@gmail.com" className="text-lg font-bold text-gray-900 hover:text-brand-blue transition-colors">
+                    sharmajugendra5@gmail.com
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-gray-50 p-8 md:p-12 rounded-[2.5rem] border border-gray-100 relative"
           >
-            <div className="relative z-10 w-full aspect-square rounded-3xl overflow-hidden shadow-2xl">
-              <img
-                src="/src/assets/images/coaching_center_hero_1779018700952.png"
-                alt="Coaching Center Class"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-brand-blue/40 to-transparent"></div>
-            </div>
-
-            {/* Floating Accents */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-brand-yellow/20 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-brand-blue/10 rounded-full blur-3xl"></div>
-            
-            <div className="absolute bottom-8 -right-4 md:-right-8 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center space-x-3">
-              <div className="bg-green-100 p-2 rounded-lg">
-                <BookOpen className="w-6 h-6 text-green-600" />
+            <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">FullName</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-hidden focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
+                    placeholder="John Doe"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">PhoneNumber</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-hidden focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
+                    placeholder="+91 XXXXX XXXXX"
+                    required
+                  />
+                </div>
               </div>
               <div>
-                <span className="block text-sm font-bold text-gray-900">Personalized</span>
-                <span className="block text-xs text-gray-500">Attention for All</span>
-              </div>
-            </div>
-
-            <div className="absolute top-1/4 -left-8 bg-white p-4 rounded-2xl shadow-xl z-20 hidden md:flex items-center space-x-3">
-              <div className="bg-brand-yellow/20 p-2 rounded-lg">
-                <GraduationCap className="w-6 h-6 text-brand-yellow shadow-xs" />
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
+                <select 
+                  name="course"
+                  value={formData.course}
+                  onChange={handleChange}
+                  className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-hidden focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
+                >
+                  <option>Board Coaching (6-12th)</option>
+                  <option>English Speaking Course</option>
+                  <option>Career Guidance</option>
+                  <option>Other Enquiry</option>
+                </select>
               </div>
               <div>
-                <span className="block text-sm font-bold text-gray-900">Board Experts</span>
-                <span className="block text-xs text-gray-500">Result Oriented</span>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-hidden focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all"
+                  placeholder="How can we help you?"
+                  required
+                ></textarea>
               </div>
-            </div>
+              <button
+                type="submit"
+                className="w-full bg-brand-blue text-white font-bold py-4 rounded-xl flex items-center justify-center space-x-2 hover:bg-opacity-90 hover:shadow-lg transition-all"
+              >
+                <span>Send Message</span>
+                <Send className="w-5 h-5" />
+              </button>
+            </form>
+
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-yellow/5 rounded-full blur-3xl -z-10"></div>
           </motion.div>
         </div>
       </div>
